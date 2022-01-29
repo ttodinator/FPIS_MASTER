@@ -4,6 +4,7 @@ using FPIS.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FPIS.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220129014641_pass465")]
+    partial class pass465
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,14 +158,14 @@ namespace FPIS.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "09966a85-d4eb-4ca1-a416-4ac14bec592b",
+                            ConcurrencyStamp = "21705a17-6091-427b-ba9b-37628c68efd9",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Petar",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPo1DcMeGcUjKiExnAV8s57ugB87QdJYGkHXKPVtHWbQ6HybGgL6pdVoReEqLdONbw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEG6jZc1peD4yTcA6vKEIQVz5jG2jZB/grdCMq6yFgXjGH14K6M1LJ+UkCl5H+ilXVg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Surname = "Todic",

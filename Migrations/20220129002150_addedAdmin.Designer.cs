@@ -4,6 +4,7 @@ using FPIS.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FPIS.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220129002150_addedAdmin")]
+    partial class addedAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -158,17 +160,16 @@ namespace FPIS.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "09966a85-d4eb-4ca1-a416-4ac14bec592b",
+                            ConcurrencyStamp = "86d37db3-d400-4202-8c28-bdf8c6c12021",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Petar",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPo1DcMeGcUjKiExnAV8s57ugB87QdJYGkHXKPVtHWbQ6HybGgL6pdVoReEqLdONbw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Surname = "Todic",
                             TwoFactorEnabled = false,
-                            UserName = "admin1"
+                            UserName = "admin"
                         });
                 });
 
