@@ -6,6 +6,7 @@ namespace FPIS.GraphQL
 {
     public class Query
     {
+        [HotChocolate.AspNetCore.Authorization.Authorize]
         [UseProjection]
         [UseFiltering]
         [UseSorting]

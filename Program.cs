@@ -25,10 +25,8 @@ builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;
                                             Database=FPIS");
 });
-
 builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddGraphQLServer().AddQueryType<Query>().AddMutationType<Mutation>().AddProjections().AddFiltering().AddSorting();
+builder.Services.AddGraphQLServer().AddAuthorization().AddQueryType<Query>().AddMutationType<Mutation>().AddProjections().AddFiltering().AddSorting().RegisterService<ITokenService>();
 builder.Services.AddCors();
 builder.Services.AddIdentityCore<AppUser>(opt =>
             {
@@ -52,11 +50,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
                     };
                 });
-
-builder.Services.AddAuthorization(opt =>
-{
-    opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-});
 
 
 

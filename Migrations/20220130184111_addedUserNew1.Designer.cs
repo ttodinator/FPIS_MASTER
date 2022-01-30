@@ -4,6 +4,7 @@ using FPIS.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FPIS.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220130184111_addedUserNew1")]
+    partial class addedUserNew1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,6 +117,9 @@ namespace FPIS.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("PasswordCustom")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
@@ -158,12 +163,12 @@ namespace FPIS.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e2dc1485-cf68-454e-b951-687d9de9c0c2",
+                            ConcurrencyStamp = "8def28b6-ceb9-484f-8c40-3711c2d38a19",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Petar",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK9TAAC3ytoDKIk90ye6YZ5oC8SsSjO//0Zj3/8Fim3WQz6i41GyCjCEZs+P13wCng==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJryyh1M0p7lZkFQEOsDYTy0U0y+yyzhm5uwil/CtUm3H/eri6Hct9io7147BFBstw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Surname = "Todic",

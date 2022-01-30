@@ -11,7 +11,7 @@ namespace FPIS.JWT
     {
         private readonly SymmetricSecurityKey key;
         UserManager<AppUser> userManager;
-        public TokenService(IConfiguration config, UserManager<AppUser> userManager)
+        public TokenService(IConfiguration config,[Service] UserManager<AppUser> userManager)
         {
             this.key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
             this.userManager = userManager;

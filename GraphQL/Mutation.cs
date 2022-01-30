@@ -5,22 +5,22 @@ using FPIS.JWT;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace FPIS.GraphQL
 {
     public class Mutation
     {
-        UserManager<AppUser> userManager;
-        SignInManager<AppUser> signInManager;
         private ITokenService tokenService;
+        IConfiguration config;
         //private Context context;
 
-        public Mutation(Context context, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService)
+        public Mutation(Context context, IConfiguration config)
         {
-            this.tokenService = tokenService;
-            this.signInManager = signInManager;
-            this.userManager = userManager;
-            //this.context = context;
+            this.config = config;
         }
         public async Task<Delatnost> AddDelatnost([Service] Context context, Delatnost delatnost)
         {
@@ -29,6 +29,9 @@ namespace FPIS.GraphQL
         }
 
         public async Task<UserDto> Login([Service] Context context,
+            [Service] SignInManager<AppUser> signInManager,
+            [Service] UserManager<AppUser> userManager,
+            [Service] ITokenService tokenService,
             LoginDto loginDto)
         {
             //var user = await userManager.Users.SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
@@ -42,9 +45,38 @@ namespace FPIS.GraphQL
             return new UserDto
             {
                 Username = user.UserName,
-                Token = await tokenService.CreateToken(user),
+                Token = await tokenService.CreateToken(user)
 
             };
+        }
+
+
+        private async Task<string> createTokenAsync(UserManager<AppUser> userManager, AppUser user )
+        {
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.NameId,user.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.UniqueName,user.UserName)
+            };
+
+            var roles = await userManager.GetRolesAsync(user);
+
+
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(7),
+                SigningCredentials = creds
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
         }
     }
 }

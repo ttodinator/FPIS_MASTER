@@ -13,6 +13,7 @@ namespace FPIS.Entities
     {
         public DbSet<Delatnost> Delatnost { get; set; }
         public DbSet<AppUser> AppUser { get; set; }
+        public DbSet<User> User { get; set; }
 
         public Context(DbContextOptions options) : base(options)
         {
