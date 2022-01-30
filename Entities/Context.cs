@@ -12,6 +12,7 @@ namespace FPIS.Entities
         IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public DbSet<Delatnost> Delatnost { get; set; }
+        public DbSet<AppUser> AppUser { get; set; }
 
         public Context(DbContextOptions options) : base(options)
         {
