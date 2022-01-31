@@ -4,6 +4,7 @@ using FPIS.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FPIS.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220131003025_data3")]
+    partial class data3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -851,161 +853,6 @@ namespace FPIS.Migrations
                     b.ToTable("ZahtevZaProveruTehnickihUsluga");
                 });
 
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.PotvrdaORealizacijiPodrske", b =>
-                {
-                    b.Property<int>("IDPotvrde")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDPotvrde"), 1L, 1);
-
-                    b.Property<DateTime>("Datum")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IDZahtevaTP")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rbr")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Uradjeno")
-                        .HasColumnType("bit");
-
-                    b.HasKey("IDPotvrde");
-
-                    b.HasIndex("IDZahtevaTP");
-
-                    b.HasIndex("Rbr", "IDZahtevaTP");
-
-                    b.ToTable("PotvrdaORealizacijiPodrske");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.Servis", b =>
-                {
-                    b.Property<int>("IDServisa")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDServisa"), 1L, 1);
-
-                    b.Property<string>("Naziv")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Opis")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IDServisa");
-
-                    b.ToTable("Servis");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.StavkaZahtevaAS", b =>
-                {
-                    b.Property<int>("Rbr")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDZahtevaAS")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDServisa")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("RokIsporuke")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Rbr", "IDZahtevaAS");
-
-                    b.HasIndex("IDServisa");
-
-                    b.HasIndex("IDZahtevaAS");
-
-                    b.ToTable("StavkaZahtevaAS");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.StavkaZahtevaTP", b =>
-                {
-                    b.Property<int>("Rbr")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDZahtevaTP")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Opis")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ServisIDServisa")
-                        .HasColumnType("int");
-
-                    b.HasKey("Rbr", "IDZahtevaTP");
-
-                    b.HasIndex("IDZahtevaTP");
-
-                    b.HasIndex("ServisIDServisa");
-
-                    b.ToTable("StavkaZahtevaTP");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.ZahtevZaAktivacijuServisa", b =>
-                {
-                    b.Property<int>("IDZahtevaAS")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDZahtevaAS"), 1L, 1);
-
-                    b.Property<DateTime>("Datum")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IDUgovora")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDZap")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Odobreno")
-                        .HasColumnType("bit");
-
-                    b.HasKey("IDZahtevaAS");
-
-                    b.HasIndex("IDUgovora");
-
-                    b.HasIndex("IDZap");
-
-                    b.ToTable("ZahtevZaAktivacijuServisa");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.ZahtevZaTehnickomPodrskom", b =>
-                {
-                    b.Property<int>("IDZahtevaTP")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IDZahtevaTP"), 1L, 1);
-
-                    b.Property<DateTime>("Datum")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IDUgovora")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IDZap")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Oodbreno")
-                        .HasColumnType("bit");
-
-                    b.HasKey("IDZahtevaTP");
-
-                    b.HasIndex("IDUgovora");
-
-                    b.HasIndex("IDZap");
-
-                    b.ToTable("ZahtevZaTehnickomPodrskom");
-                });
-
             modelBuilder.Entity("FPIS.Entities.AppRole", b =>
                 {
                     b.Property<int>("Id")
@@ -1125,12 +972,12 @@ namespace FPIS.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ff16ea5b-ef69-43a1-91c3-7377c9762398",
+                            ConcurrencyStamp = "a11d81dd-6f14-4dbd-9b8b-a4ba91c56899",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Petar",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFgR4FfsH1d/wZdecJXFqR5SjKPrV4R2OadiNezKPbXVHS2l1z4vX/6zX60ypCMhXA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF86Dfi2WPUtkA0Cdeil/upywlra5weoG4xlLV+0UbtwxxSksBrWk8fG00wXUp/gbw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             Surname = "Todic",
@@ -1724,97 +1571,6 @@ namespace FPIS.Migrations
                     b.Navigation("ZaposleniSalje");
                 });
 
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.PotvrdaORealizacijiPodrske", b =>
-                {
-                    b.HasOne("FPIS.Entities._4_Implementacija_potrebnih_servisa.ZahtevZaTehnickomPodrskom", "ZaTehnickomPodrskom")
-                        .WithMany("PotvrdeORealizacijiPodrske")
-                        .HasForeignKey("IDZahtevaTP")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FPIS.Entities._4_Implementacija_potrebnih_servisa.StavkaZahtevaTP", "StavkaZahtevaTP")
-                        .WithMany("PotvrdeORealizacijiPodrske")
-                        .HasForeignKey("Rbr", "IDZahtevaTP")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("StavkaZahtevaTP");
-
-                    b.Navigation("ZaTehnickomPodrskom");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.StavkaZahtevaAS", b =>
-                {
-                    b.HasOne("FPIS.Entities._4_Implementacija_potrebnih_servisa.Servis", "Servis")
-                        .WithMany()
-                        .HasForeignKey("IDServisa")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FPIS.Entities._4_Implementacija_potrebnih_servisa.ZahtevZaAktivacijuServisa", "ZahtevZaAktivacijuServisa")
-                        .WithMany("StavkeZahtevaAs")
-                        .HasForeignKey("IDZahtevaAS")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Servis");
-
-                    b.Navigation("ZahtevZaAktivacijuServisa");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.StavkaZahtevaTP", b =>
-                {
-                    b.HasOne("FPIS.Entities._4_Implementacija_potrebnih_servisa.ZahtevZaTehnickomPodrskom", "ZahtevZaTehnickomPodrskom")
-                        .WithMany("StavkeZahtevaTP")
-                        .HasForeignKey("IDZahtevaTP")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FPIS.Entities._4_Implementacija_potrebnih_servisa.Servis", null)
-                        .WithMany("StavkeZahtevaTP")
-                        .HasForeignKey("ServisIDServisa");
-
-                    b.Navigation("ZahtevZaTehnickomPodrskom");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.ZahtevZaAktivacijuServisa", b =>
-                {
-                    b.HasOne("FPIS.Entities._3_Sklapanje_ugovora.Ugovor", "Ugovor")
-                        .WithMany("ZahteviZaAktivacijuServisa")
-                        .HasForeignKey("IDUgovora")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FPIS.Entities._1_Identifikacija_novih_klijenata.Zaposleni", "Zaposleni")
-                        .WithMany("ZahteviZaAktivacijuServisa")
-                        .HasForeignKey("IDZap")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Ugovor");
-
-                    b.Navigation("Zaposleni");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.ZahtevZaTehnickomPodrskom", b =>
-                {
-                    b.HasOne("FPIS.Entities._3_Sklapanje_ugovora.Ugovor", "Ugovor")
-                        .WithMany("ZahteviZaTehnickomPodrskom")
-                        .HasForeignKey("IDUgovora")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("FPIS.Entities._1_Identifikacija_novih_klijenata.Zaposleni", "Zaposleni")
-                        .WithMany("ZahteviZaTehnickomPodrskom")
-                        .HasForeignKey("IDZap")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Ugovor");
-
-                    b.Navigation("Zaposleni");
-                });
-
             modelBuilder.Entity("FPIS.Entities.AppUserRole", b =>
                 {
                     b.HasOne("FPIS.Entities.AppRole", "Role")
@@ -1933,13 +1689,9 @@ namespace FPIS.Migrations
 
                     b.Navigation("ZahtevZaProveruTehnickihUslugaSalje");
 
-                    b.Navigation("ZahteviZaAktivacijuServisa");
-
                     b.Navigation("ZahteviZaProveruKreditneSposobnostiPrima");
 
                     b.Navigation("ZahteviZaProveruKreditneSposobnostiSalje");
-
-                    b.Navigation("ZahteviZaTehnickomPodrskom");
 
                     b.Navigation("zahtevZaPodacima")
                         .IsRequired();
@@ -2004,38 +1756,9 @@ namespace FPIS.Migrations
                     b.Navigation("StavkePonudeSklapanjeUgovora");
                 });
 
-            modelBuilder.Entity("FPIS.Entities._3_Sklapanje_ugovora.Ugovor", b =>
-                {
-                    b.Navigation("ZahteviZaAktivacijuServisa");
-
-                    b.Navigation("ZahteviZaTehnickomPodrskom");
-                });
-
             modelBuilder.Entity("FPIS.Entities._3_Sklapanje_ugovora.ZahtevZaProveruTehnickihUsluga", b =>
                 {
                     b.Navigation("StavkeZahteva");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.Servis", b =>
-                {
-                    b.Navigation("StavkeZahtevaTP");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.StavkaZahtevaTP", b =>
-                {
-                    b.Navigation("PotvrdeORealizacijiPodrske");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.ZahtevZaAktivacijuServisa", b =>
-                {
-                    b.Navigation("StavkeZahtevaAs");
-                });
-
-            modelBuilder.Entity("FPIS.Entities._4_Implementacija_potrebnih_servisa.ZahtevZaTehnickomPodrskom", b =>
-                {
-                    b.Navigation("PotvrdeORealizacijiPodrske");
-
-                    b.Navigation("StavkeZahtevaTP");
                 });
 
             modelBuilder.Entity("FPIS.Entities.AppRole", b =>

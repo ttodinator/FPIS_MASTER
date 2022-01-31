@@ -1,6 +1,7 @@
 ﻿using FPIS.Controllers;
 using FPIS.Entities;
 using FPIS.Entities._1_Identifikacija_novih_klijenata;
+using FPIS.Entities._2_Prikupljanje_potrebnih_informacija_o_klijentu;
 using FPIS.JWT;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,22 @@ namespace FPIS.GraphQL
         public async Task<Delatnost> AddDelatnost([Service] Context context, Delatnost delatnost)
         {
             context.Add(delatnost);
-            return delatnost;
+            if (await context.SaveChangesAsync() > 0) return delatnost;
+            return null;
+        }
+
+        public async Task<Valuta> AddValuta([Service] Context context, Valuta valuta)
+        {
+            context.Add(valuta);
+            if (await context.SaveChangesAsync() > 0) return valuta;
+            return null;
+        }
+
+        public async Task<VrstaKredita> AddVrstaKredita([Service] Context context, VrstaKredita vrstaKredita)
+        {
+            context.Add(vrstaKredita);
+            if (await context.SaveChangesAsync() > 0) return vrstaKredita;
+            return null;
         }
 
         public async Task<UserDto> Login([Service] Context context,

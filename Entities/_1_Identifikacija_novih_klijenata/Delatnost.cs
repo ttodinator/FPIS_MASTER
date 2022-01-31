@@ -7,5 +7,6 @@ namespace FPIS.Entities._1_Identifikacija_novih_klijenata
         [Key]
         public int SifraDel { get; set; }
         public string Naziv { get; set; }
+        public List<Klijent> Klijenti { get; set; }
     }
 }
